@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
 const Scoreboard = ({ dealerRoundTotal, dealerPoints, player1RoundTotal, player1Points }) => (
     <div>
-        <table className="scoreboard">
+        <table className='scoreboard'>
             <thead>
                 <tr>
-                    <th colSpan="3">Scoreboard</th>
+                    <th colSpan='3'>Scoreboard</th>
                 </tr>
-                <tr className="tableHeaders">
+                <tr className='tableHeaders'>
                     <th>Name</th>
                     <th>Round Total</th>
                     <th>Points</th>
