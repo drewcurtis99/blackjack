@@ -19,7 +19,7 @@ class Game extends Component {
     render() {
         let { dealerRoundTotal, dealerPoints, dealerCards, player1RoundTotal, player1Points, player1Cards} = this.state;
       return (
-        <div>
+        <div className="gameContainer">
             <h1>BlackJack</h1>
             <Scoreboard 
                 dealerRoundTotal={dealerRoundTotal} 

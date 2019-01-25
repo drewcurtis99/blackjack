@@ -2,12 +2,12 @@ import React from "react";
 
 const Scoreboard = ({ dealerRoundTotal, dealerPoints, player1RoundTotal, player1Points }) => (
     <div>
-        <table>
+        <table className="scoreboard">
             <thead>
                 <tr>
                     <th colSpan="3">Scoreboard</th>
                 </tr>
-                <tr>
+                <tr className="tableHeaders">
                     <th>Name</th>
                     <th>Round Total</th>
                     <th>Points</th>

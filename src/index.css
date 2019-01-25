@@ -12,3 +12,53 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.dealerCards, .playerCards {
+  display: flex;
+  /* justify-content: space-between; */
+  /* border: 1px solid black; */
+}
+
+.dealerCard, .playerCard {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+}
+
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scoreboard > tbody > tr > td {
+  text-align: center; 
+  vertical-align: middle;
+}
+
+.tableHeaders > th {
+  text-decoration: underline;
+}
+
+.interface {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+}
+
+.interface > button {
+  width: 60px;
+  font-size: 14px;
+}
+
+.dealBtn {
+  background: rgb(6, 210, 236);
+}
+
+.hitBtn {
+  background: rgb(17, 218, 17);
+}
+
+.holdBtn {
+  background: rgb(240, 50, 3);
+}
