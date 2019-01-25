@@ -10,12 +10,14 @@ class Game extends Component {
         this.state = {
             dealerRoundTotal: 0,
             dealerPoints: 0,
+            dealerCards: ["2A", 'KS'],
             player1RoundTotal: 0,
-            player1Points: 0
+            player1Points: 0,
+            player1Cards: ["2A", 'KH']
         }
       }
     render() {
-        let { dealerRoundTotal, dealerPoints, player1RoundTotal, player1Points} = this.state;
+        let { dealerRoundTotal, dealerPoints, dealerCards, player1RoundTotal, player1Points, player1Cards} = this.state;
       return (
         <div>
             Testing
@@ -24,8 +26,8 @@ class Game extends Component {
                 dealerPoints={dealerPoints} 
                 player1RoundTotal={player1RoundTotal} 
                 player1Points={player1Points} />
-            <Dealer />
-            <Player />
+            <Dealer dealerCards={dealerCards} />
+            <Player player1Cards={player1Cards} />
             <Interface />
         </div>
       );

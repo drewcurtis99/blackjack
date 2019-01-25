@@ -1,10 +1,16 @@
 import React from "react";
 import Card from "./Card";
 
-const Player = ({  }) => (
+const Player = ({ player1Cards }) => (
     <div>
-        Player Component
-        <Card />
+        <div>Player Cards</div>
+        <div className="playerCards">
+            {player1Cards.map((card, index) => (
+                <div className="playerCard">
+                    <Card key={card} card={card} />
+                </div>
+            ))}
+        </div>
     </div>
 );
 
