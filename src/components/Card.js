@@ -1,8 +1,8 @@
 import React from "react";
 
-const Card = ({  }) => (
-    <div>
-        Card Component
+const Card = ({ card }) => (
+    <div className="card">
+        {card}
     </div>
 );
 

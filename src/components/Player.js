@@ -6,8 +6,8 @@ const Player = ({ player1Cards }) => (
         <div>Player Cards</div>
         <div className="playerCards">
             {player1Cards.map((card, index) => (
-                <div className="playerCard">
-                    <Card key={card} card={card} />
+                <div key={card} className="playerCard">
+                    <Card card={card} />
                 </div>
             ))}
         </div>
