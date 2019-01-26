@@ -21,6 +21,7 @@ class Game extends Component {
             isGameOver: false
         }
 
+        this.handleHold = this.handleHold.bind(this);
         this.handleHit = this.handleHit.bind(this);
         this.handleDeal = this.handleDeal.bind(this);
         this.startGame = this.startGame.bind(this);
@@ -122,7 +123,6 @@ class Game extends Component {
         let drawCard = this.dealCard();
         player1Hand.push(drawCard);
         let updatedScore = this.calculateScore(player1Hand);
-        console.log('SCORE', updatedScore);
         if (updatedScore > 21) {
             this.setState({
                 isGameOver: true,
@@ -133,6 +133,36 @@ class Game extends Component {
             player1Hand,
             player1RoundTotal: updatedScore
         })
+    }
+
+    handleHold() {
+        return new Promise((res) => {
+            this.setState({
+                isGameOver: true, 
+                isHidden: false,
+                dealerRoundTotal: this.state.dealerHiddenRoundTotal
+            }, res(true))
+        }).then(() => {
+            let { dealerHand, dealerRoundTotal, player1RoundTotal } = this.state;
+            let drawCardInterval = setInterval(() => {
+                if (dealerRoundTotal < 21 && dealerRoundTotal <= player1RoundTotal) {
+                    let drawCard = this.dealCard();
+                    dealerHand.push(drawCard);
+                    dealerRoundTotal = this.calculateScore(dealerHand);
+                    this.setState({
+                        dealerHand,
+                        dealerRoundTotal
+                    })
+                } else {
+                    this.handleScoring();
+                    clearInterval(drawCardInterval);
+                }
+            }, 1000);
+        })
+    }
+
+    handleScoring() {
+        return
     }
 
     render() {
@@ -147,7 +177,10 @@ class Game extends Component {
                 player1Points={player1Points} />
             <Dealer dealerHand={dealerHand} isHidden={isHidden} />
             <Player player1Hand={player1Hand} />
-            <Interface handleDeal={this.handleDeal} handleHit={this.handleHit} />
+            <Interface 
+            handleDeal={this.handleDeal} 
+            handleHit={this.handleHit} 
+            handleHold={this.handleHold} />
         </div>
       );
     }
