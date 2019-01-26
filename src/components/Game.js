@@ -19,28 +19,28 @@ class Game extends Component {
             player1Hand: [],
             isHidden: true
         }
-
-        // this.startGame = this.startGame.bind(this);
+        this.handleDeal = this.handleDeal.bind(this);
+        this.startGame = this.startGame.bind(this);
       }
       
-    
-
     componentDidMount() {
         this.startGame();
     }
     
     startGame() {
-        this.shuffleDeck(this.createDeck(1), 1);
-        
-        let player1Cards = [this.dealCard(), this.dealCard()];
-        let dealerCards = [this.dealCard(), this.dealCard()];
-
-        this.setState({
-            player1Hand: player1Cards,
-            player1RoundTotal: this.calculateScore(player1Cards),
-            dealerHand: dealerCards,
-            dealerRoundTotal: this.calculateScore([dealerCards[1]]),
-            dealerHiddenRoundTotal: this.calculateScore(dealerCards)
+        return new Promise((res) => {
+            return res(this.shuffleDeck(this.createDeck(1), 1))
+        }).then(() => {
+            let player1Cards = [this.dealCard(), this.dealCard()];
+            let dealerCards = [this.dealCard(), this.dealCard()];
+    
+            this.setState({
+                player1Hand: player1Cards,
+                player1RoundTotal: this.calculateScore(player1Cards),
+                dealerHand: dealerCards,
+                dealerRoundTotal: this.calculateScore([dealerCards[1]]),
+                dealerHiddenRoundTotal: this.calculateScore(dealerCards)
+            })
         })
     }
 
@@ -73,7 +73,7 @@ class Game extends Component {
     }
 
     createDeck(deckQuantity) {
-        let { cards } = this.state;
+        let cards = [];
         let numberCards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
         let suits = ['♠', '♥', '♦', '♣'];
         for (let deckCount = 0; deckCount < deckQuantity; deckCount++) {
@@ -87,11 +87,10 @@ class Game extends Component {
     }
 
     shuffleDeck(deck, shuffleQuantity = 1) {
-        let { cards } = this.state;
         for (let shuffleCount = 0; shuffleCount < shuffleQuantity; shuffleCount++) {
             deck = _.shuffle(deck);
         }
-        this.setState({cards, deck});
+        this.setState({cards: deck});
     }
 
     dealCard() {
@@ -99,12 +98,18 @@ class Game extends Component {
         let cardIndex = this.getRandomValueInclusive(0, cards.length - 1);
         let card = cards[cardIndex];
         cards.splice(cardIndex, 1);
-        this.setState({cards: cards});
+        this.setState({cards});
         return card;
     }
 
     getRandomValueInclusive(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
+    }
+
+    //Click Handler Functions
+
+    handleDeal() {
+        this.startGame();
     }
 
     render() {
@@ -119,7 +124,7 @@ class Game extends Component {
                 player1Points={player1Points} />
             <Dealer dealerHand={dealerHand} isHidden={isHidden} />
             <Player player1Hand={player1Hand} />
-            <Interface />
+            <Interface handleDeal={this.handleDeal} />
         </div>
       );
     }

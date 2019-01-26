@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Interface = ({  }) => (
+const Interface = ({ handleDeal }) => (
     <div className='interface'>
-        <button className='dealBtn'>Deal</button>
+        <button onClick={() => handleDeal()} className='dealBtn'>Deal</button>
         <button className='hitBtn'>Hit</button>
         <button className='holdBtn'>Hold</button>
     </div>
