@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Interface = ({ handleDeal }) => (
+const Interface = ({ handleDeal, handleHit }) => (
     <div className='interface'>
         <button onClick={() => handleDeal()} className='dealBtn'>Deal</button>
-        <button className='hitBtn'>Hit</button>
+        <button onClick={() => handleHit()} className='hitBtn'>Hit</button>
         <button className='holdBtn'>Hold</button>
     </div>
 );

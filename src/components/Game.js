@@ -17,8 +17,11 @@ class Game extends Component {
             player1RoundTotal: 0,
             player1Points: 0,
             player1Hand: [],
-            isHidden: true
+            isHidden: true,
+            isGameOver: false
         }
+
+        this.handleHit = this.handleHit.bind(this);
         this.handleDeal = this.handleDeal.bind(this);
         this.startGame = this.startGame.bind(this);
       }
@@ -39,7 +42,9 @@ class Game extends Component {
                 player1RoundTotal: this.calculateScore(player1Cards),
                 dealerHand: dealerCards,
                 dealerRoundTotal: this.calculateScore([dealerCards[1]]),
-                dealerHiddenRoundTotal: this.calculateScore(dealerCards)
+                dealerHiddenRoundTotal: this.calculateScore(dealerCards),
+                isGameOver: false,
+                isHidden: true
             })
         })
     }
@@ -112,6 +117,24 @@ class Game extends Component {
         this.startGame();
     }
 
+    handleHit() {
+        let { player1Hand, dealerPoints } = this.state;
+        let drawCard = this.dealCard();
+        player1Hand.push(drawCard);
+        let updatedScore = this.calculateScore(player1Hand);
+        console.log('SCORE', updatedScore);
+        if (updatedScore > 21) {
+            this.setState({
+                isGameOver: true,
+                dealerPoints: dealerPoints + 1,
+            })
+        }
+        this.setState({
+            player1Hand,
+            player1RoundTotal: updatedScore
+        })
+    }
+
     render() {
         let { dealerRoundTotal, dealerPoints, dealerHand, player1RoundTotal, player1Points, player1Hand, isHidden} = this.state;
       return (
@@ -124,7 +147,7 @@ class Game extends Component {
                 player1Points={player1Points} />
             <Dealer dealerHand={dealerHand} isHidden={isHidden} />
             <Player player1Hand={player1Hand} />
-            <Interface handleDeal={this.handleDeal} />
+            <Interface handleDeal={this.handleDeal} handleHit={this.handleHit} />
         </div>
       );
     }
