@@ -187,3 +187,8 @@ class Game extends Component {
   }
   
   export default Game;
+
+  //Steps left because I ran out of time
+    // 1. Complete handleScoring
+    // 2. make hit and hold buttons not clickable once a game is over
+    // 3. make application look better with more styling.
